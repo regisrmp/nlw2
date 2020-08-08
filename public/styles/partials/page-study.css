@@ -30,6 +30,11 @@
     background: var(--color-secondary-dark);
 }
 
+#page-study main .no-results {
+    max-width: 30rem;
+    margin: 12rem auto;
+    text-align: center;
+}
 
 #page-study main {
     margin: 3.2rem auto;

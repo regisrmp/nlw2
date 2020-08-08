@@ -29,7 +29,7 @@
 
             <div class="header-content">
                 <strong>Esses são os proffys disponiveis</strong>
-                <form id="search-teachers">
+                <form action="" id="search-teachers">
                     <div class="select-block">
                         <label for="subject">Matéria</label>
                         <select name="subject" id="subject">
@@ -42,19 +42,19 @@
                         </select>
                     </div>
                     <div class="select-block">
-                        <label for="weeekday">Dia da semana</label>
-                        <select name="weeekday" id="weeekday">
+                        <label for="weekday">Dia da semana</label>
+                        <select name="weekday" id="weekday">
                             <option value="" disabled="" hidden="">Selecione uma ação</option>
-                            {% for weeekday in weekdays %}
-                            <option value="{{loop.index0}}" {{ "selected" if filters.weeekday == loop.index0 }}>
-                                {{weeekday}}
+                            {% for weekday in weekdays %}
+                            <option value="{{loop.index0}}" {{ "selected" if filters.weekday == loop.index0 }}>
+                                {{weekday}}
                             </option>
                             {%endfor%}
                         </select>
                     </div>
                     <div class="input-block">
                         <label for="time">Hora</label>
-                        <input name="time" id="time" type="time" value="{{filters.time}}">
+                        <input name="time" id="time" type="time" value="{{filters.time}}" required>
                     </div>
                     <button type="submit">Filtrar</button>
                 </form>
@@ -64,30 +64,35 @@
         </header>
         <main>
 
-            {%for proffy in proffys %}
+            {% if proffys == "" %}
+            <p class="no-results">Nenhum professor encontrado com sua pesquisa</p>
+            {% else %}
 
-            <article class="teacher-item">
-                <header>
-                    <img src="{{proffy.avatar}}" alt="{{proffy.name}}">
-                    <div>
-                        <strong>{{proffy.name}}</strong>
-                        <span>{{proffy.subject}}</span>
-                    </div>
-                </header>
+                {%for proffy in proffys %}
 
-                <p>{{proffy.bio}}</p>
+                <article class="teacher-item">
+                    <header>
+                        <img src="{{proffy.avatar}}" alt="{{proffy.name}}">
+                        <div>
+                            <strong>{{proffy.name}}</strong>
+                            <span>{{proffy.subject}}</span>
+                        </div>
+                    </header>
 
-                <footer>
-                    <p>Preço/hora<strong>R$ {{proffy.cost}}</strong>
-                    </p>
-                    <a href="https://api.whatsapp.com/send?l=pt_BR&phone=55{{proffy.whatsapp}}&text=Tenho interesse na sua aula {{proffy.subject}} {{proffy.name}}"
-                        class="button" target="_blank">
-                        <img src="/images/icons/whatsapp.svg" alt="Whatsapp">Entrar em contato
-                    </a>
-                </footer>
+                    <p>{{proffy.bio}}</p>
 
-            </article>
-            {%endfor%}
+                    <footer>
+                        <p>Preço/hora<strong>R$ {{proffy.cost}}</strong>
+                        </p>
+                        <a href="https://api.whatsapp.com/send?l=pt_BR&phone=55{{proffy.whatsapp}}&text=Tenho interesse na sua aula {{proffy.subject}} {{proffy.name}}"
+                            class="button" target="_blank">
+                            <img src="/images/icons/whatsapp.svg" alt="Whatsapp">Entrar em contato
+                        </a>
+                    </footer>
+
+                </article>
+                {%endfor%}
+            {% endif %}
         </main>
 
     </div>
