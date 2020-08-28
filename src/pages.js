@@ -25,7 +25,9 @@ async function pageStudy(req, res) {
                           and cs.weekday = ${filters.weekday}
                           and ${time} between cs.time_from and cs.time_to)
     `;
-
+	
+	console.log(query);
+	
     // inicio como vazio
     var proffys = [];
 

@@ -26,3 +26,4 @@ server.post("/save-classes", Pages.saveClasses);
 
 server.listen(5500);
 
+console.log('API ONLINE');
